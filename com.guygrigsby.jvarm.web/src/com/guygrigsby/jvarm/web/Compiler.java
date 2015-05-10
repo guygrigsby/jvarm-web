@@ -68,6 +68,7 @@ public class Compiler extends HttpServlet {
 			Registers registers = new Registers(regMap);
 			session.setAttribute(Jvarm.PROGRAM, program);
 			session.setAttribute(Jvarm.REGISTERS, registers);
+			response.getWriter().write("Compiled Successfully. You may step now.");
 		} else {
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");

@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <title>jvARM</title>
-<script src="http://code.jquery.com/jquery-latest.js">
-	
-</script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#compile').click(function(event) {
@@ -23,6 +24,7 @@
 		$('#step').click(function(event) {
 				$.get('Jvarm/Step', function(registersObject) {
 					var table = document.createElement("table");
+					table.className = "table table-bordered";
 					registers.innerHTML = "";
 					for ( var register in registersObject) {
 						if (registersObject.hasOwnProperty(register)) {
@@ -40,12 +42,12 @@
 </script>
 </head>
 <body>
-<div id="main">
-	<div id="registers" style="float: right;"></div>
-	<div style="float: left;">
-		<form id="form1">
+<div id="main" class="container">
+<div class="row">
+	<div class="col-sm-8">
+		<form role="form" id="form1">
 			<h1>jvARM : compile ARM source</h1>
-			<textarea rows="25" cols="50" type="text" id="ARMsource">
+			<textarea class="form-control" rows="25" cols="50" type="text" id="ARMsource">
 MOV r0, #0
 MOV r1, #1
 MOV r12, #10
@@ -57,12 +59,14 @@ SUB r12, r12, #1
 CMP r12, #0
 BNE loop</textarea>
 	
-			<input type="button" id="compile" value="Start Debug" /> <input
-				type="button" id="step" value="Step" />
+			<input type="button" class="btn btn-default" id="compile" value="Start Debug" /> <input
+				type="button" class="btn btn-default" id="step" value="Step" />
 			<br />
 		</form>
-		<div id="console"></div>
 	</div>
+	<div id="registers" class="col-sm-4"></div>
+</div>
+	<div id="console"></div>
 </div>
 </body>
 </html>
