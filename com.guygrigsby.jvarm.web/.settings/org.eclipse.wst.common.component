@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="com.guygrigsby.jvarm.web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="com.guygrigsby.jvarm.core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.guygrigsby.jvarm.core/com.guygrigsby.jvarm.core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-core-2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.guygrigsby.jvarm.core/lib/log4j-core-2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-api-2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/com.guygrigsby.jvarm.core/lib/log4j-api-2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="com.guygrigsby.jvarm.web"/>
+        <property name="java-output-path" value="/com.guygrigsby.jvarm.web/build/classes"/>
+    </wb-module>
+</project-modules>
