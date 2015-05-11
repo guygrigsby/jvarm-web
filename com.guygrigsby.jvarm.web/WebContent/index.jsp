@@ -22,18 +22,19 @@
 	});
 	$(document).ready(function() {
 		$('#step').click(function(event) {
-				$.get('Jvarm/Step', function(registersObject) {
+				$.get('Jvarm/Step', function(state) {
+					$('#console').text("");
 					var table = document.createElement("table");
 					table.className = "table table-bordered";
 					registers.innerHTML = "";
-					for ( var register in registersObject) {
-						if (registersObject.hasOwnProperty(register)) {
-							var row = table.insertRow(0);
-							var cell1 = row.insertCell(0);
-							var cell2 = row.insertCell(1);
-							cell1.innerHTML = register;
-							cell2.innerHTML = registersObject[register];
-						}
+					for (var i = state.registers.length-1; i >= 0 ; i--) {
+						var register = state.registers[i];
+						var row = table.insertRow(0);
+						var cell1 = row.insertCell(0);
+						var cell2 = row.insertCell(1);
+						var regName = Object.keys(register);
+						cell1.innerHTML = regName;
+						cell2.innerHTML = register[regName];
 					}
 					document.getElementById("registers").appendChild(table);
 				});
@@ -44,9 +45,9 @@
 <body>
 <div id="main" class="container">
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-4">
 		<form role="form" id="form1">
-			<h1>jvARM : compile ARM source</h1>
+			<h1>jvARM</h1>
 			<textarea class="form-control" rows="25" cols="50" type="text" id="ARMsource">
 MOV r0, #0
 MOV r1, #1
@@ -65,6 +66,7 @@ BNE loop</textarea>
 		</form>
 	</div>
 	<div id="registers" class="col-sm-4"></div>
+	<div id=memory class="col-sm-4"></div>
 </div>
 	<div id="console"></div>
 </div>

@@ -4,8 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,7 +65,20 @@ public class Compiler extends HttpServlet {
 		if (errors.isEmpty()) {
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
-			Map<String, Integer> regMap = new HashMap<String, Integer>();
+			Comparator<String> comp = (o1, o2) -> {
+				if (isFlag(o1) && isFlag(o2)) {
+					return o1.compareTo(o2);
+				}
+				if (isFlag(o1)) {
+					return 1;
+				} else if (isFlag(o2)) {
+					return -1;
+				}
+				Integer i1 = Integer.parseInt(o1.substring(1));
+				Integer i2 = Integer.parseInt(o2.substring(1));
+				return i1.compareTo(i2);
+			};
+			Map<String, Integer> regMap = new TreeMap<String, Integer>(comp);
 			Registers registers = new Registers(regMap);
 			session.setAttribute(Jvarm.PROGRAM, program);
 			session.setAttribute(Jvarm.REGISTERS, registers);
@@ -75,6 +89,9 @@ public class Compiler extends HttpServlet {
 			response.getWriter().write(errors);
 		}
 
+	}
+	private boolean isFlag(String name) {
+		return name.equals("N") || name.equals("Z") || name.equals("C") || name.equals("V");
 	}
 
 }
