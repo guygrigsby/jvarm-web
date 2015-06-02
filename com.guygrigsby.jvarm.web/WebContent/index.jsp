@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="jvarm.css">
 <title>jvARM</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -25,7 +26,7 @@
 				$.get('jvarm', function(state) {
 					$('#console').text("");
 					var table = document.createElement("table");
-					table.className = "table table-bordered";
+					table.className = "table table-condensed table-hover";
 					registers.innerHTML = "";
 					for (var i = state.registers.length-1; i >= 0 ; i--) {
 						var register = state.registers[i];
@@ -40,6 +41,9 @@
 				});
 		});
 	});
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();   
+	});
 </script>
 </head>
 <body>
@@ -48,6 +52,7 @@
 	<div class="col-sm-4">
 		<form role="form" id="form1">
 			<h1>jvARM</h1>
+			<a href="#" data-toggle="tooltip" title="Enter source code here.">
 			<textarea class="form-control" rows="25" cols="50" type="text" id="ARMsource">
 MOV r0, #0
 MOV r1, #1
@@ -59,9 +64,13 @@ MOV r1, r2
 SUB r12, r12, #1
 CMP r12, #0
 BNE loop</textarea>
-	
-			<input type="button" class="btn btn-default" id="compile" value="Start Debug" /> <input
-				type="button" class="btn btn-default" id="step" value="Step" />
+</a>
+		<a href="#" data-toggle="tooltip" title="Click this first to compile your code.">
+			<input type="button" class="btn btn-default" id="compile" value="Start Debug" /> 
+		</a>
+		<a href="#" data-toggle="tooltip" title="Execute a single line of code.">
+			<input type="button" class="btn btn-default" id="step" value="Step" />
+		</a>
 			<br />
 		</form>
 	</div>
@@ -70,5 +79,17 @@ BNE loop</textarea>
 </div>
 	<div id="console"></div>
 </div>
+<div class="navbar navbar-fixed-bottom" role="navigation">
+	<div class="container">
+		<p>jvArm is open source and is hosted on github.com. 
+			Bugs/feature requests may be added <a href="https://github.com/guygrigsby/jvarm-web/issues" >here</a>.
+			Source code for the jvARM core can be found 
+			<a href="https://github.com/guygrigsby/jvarm">here</a>
+			and source code for the webapp can be found 
+			<a href="https://github.com/guygrigsby/jvarm-web">here</a>. <br>© 2015 Guy J Grigsby
+		</p>
+	</div>
+</div>
+
 </body>
 </html>
