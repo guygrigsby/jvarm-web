@@ -13,7 +13,7 @@
 	$(document).ready(function() {
 		$('#compile').click(function(event) {
 			var source = $('#ARMsource').val();
-			$.post('Jvarm/Compile', {
+			$.post('jvarm', {
 				ARMsource : source
 			}, function(responseText) {
 				$('#console').text(responseText);
@@ -22,7 +22,7 @@
 	});
 	$(document).ready(function() {
 		$('#step').click(function(event) {
-				$.get('Jvarm/Step', function(state) {
+				$.get('jvarm', function(state) {
 					$('#console').text("");
 					var table = document.createElement("table");
 					table.className = "table table-bordered";

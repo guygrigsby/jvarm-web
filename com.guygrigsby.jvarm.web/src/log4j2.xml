@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<File name="File" fileName="${sys:catalina.base}/logs/jvarm.log" immediateFlush="true" append="true">
+			<PatternLayout pattern="%-5level %d{HH:mm:ss.SSS} %logger{1} - %msg%n" />
+		</File>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.guygrigsby.jvarm" level="debug" additivity="false">
+			<appender-ref ref="File" />
+		</Logger>
+		<Root level="DEBUG" additivity="false">
+			<appender-ref ref="File" />
+		</Root>
+	</Loggers>
+</Configuration>
